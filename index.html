@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳予曦 YUSHI WU — 簡約現代藝術作品集 Portfolio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        lux: {
+                            bg: '#0a0a0c',
+                            card: '#121318',
+                            surface: '#181a20',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            gold: '#d4af37',
+                            sand: '#e2d4c0',
+                            accent: '#c5a880',
+                            muted: '#8e92a0',
+                            light: '#f8f9fa'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #e2e4e9;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+            letter-spacing: 0.01em;
+        }
+
+        /* Subtle Noise Overlay for High-End Texture */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* Hero Entrance Keyframes */
+        @keyframes heroScale {
+            0% { transform: scale(1.12); opacity: 0; filter: blur(10px); }
+            100% { transform: scale(1); opacity: 1; filter: blur(0px); }
+        }
+
+        @keyframes textSlideUp {
+            0% { transform: translateY(40px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInSlow {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .animate-hero-img {
+            animation: heroScale 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-text-1 {
+            animation: textSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+        }
+
+        .animate-text-2 {
+            animation: textSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+            opacity: 0;
+        }
+
+        .animate-text-3 {
+            animation: textSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+            opacity: 0;
+        }
+
+        .animate-fade {
+            animation: fadeInSlow 1.5s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        /* Modern Card Micro-interactions */
+        .art-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .art-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .art-card-img {
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        }
+
+        .art-card:hover .art-card-img {
+            transform: scale(1.06);
+            filter: brightness(1.05);
+        }
+
+        .art-card-overlay {
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 0%, rgba(10, 10, 12, 0.3) 60%, transparent 100%);
+        }
+
+        .art-card:hover .art-card-overlay {
+            opacity: 1;
+        }
+
+        /* Category Filter Transitions */
+        .gallery-item {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item.hide {
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Scroll Reveal Effect */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modern Glass Panel */
+        .glass-panel {
+            background: rgba(18, 19, 24, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Custom Gold Border Accent */
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(197, 168, 128, 0.15);
+        }
+
+        /* Minimal Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232530;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c5a880;
+        }
+    </style>
+</head>
+<body class="selection:bg-lux-accent selection:text-black bg-noise">
+
+    <!-- High-End Minimalist Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 border-b border-white/5 bg-lux-bg/85 backdrop-blur-xl" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
+            
+            <!-- Brand Monogram Logo -->
+            <a href="#home" class="group flex items-center gap-4">
+                <div class="w-9 h-9 rounded-full border border-lux-accent/40 flex items-center justify-center font-serif text-lux-sand text-lg transition-transform duration-700 group-hover:rotate-180 group-hover:border-lux-sand">
+                    W
+                </div>
+                <div>
+                    <span class="font-serif text-lg tracking-widest text-white uppercase block group-hover:text-lux-sand transition-colors">吳予曦</span>
+                    <span class="text-[10px] tracking-[0.25em] text-lux-muted uppercase font-mono block">Yushi Wu Visuals</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-10 text-xs tracking-widest uppercase font-medium text-lux-muted">
+                <a href="#home" class="hover:text-white transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-lux-accent hover:after:w-full after:transition-all">首頁 Home</a>
+                <a href="#works" class="hover:text-white transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-lux-accent hover:after:w-full after:transition-all">作品集 Gallery</a>
+                <a href="#exhibition" class="hover:text-white transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-lux-accent hover:after:w-full after:transition-all">特展 Exhibition</a>
+                <a href="#about" class="hover:text-white transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-lux-accent hover:after:w-full after:transition-all">關於 About</a>
+                <a href="#contact" class="hover:text-white transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-lux-accent hover:after:w-full after:transition-all">聯絡 Contact</a>
+            </nav>
+
+            <!-- Secondary Actions -->
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden sm:inline-block px-5 py-2 rounded-full border border-lux-accent/50 text-lux-sand hover:bg-lux-sand hover:text-black text-xs font-semibold tracking-widest uppercase transition-all duration-300">
+                    Inquire
+                </a>
+                <button class="md:hidden text-xl text-white p-2" id="menuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-b border-white/10 px-8 py-6 flex-col gap-5 text-sm uppercase tracking-widest">
+            <a href="#home" onclick="toggleMobileMenu()" class="py-2 text-white hover:text-lux-accent">首頁 Home</a>
+            <a href="#works" onclick="toggleMobileMenu()" class="py-2 text-white hover:text-lux-accent">作品集 Gallery</a>
+            <a href="#exhibition" onclick="toggleMobileMenu()" class="py-2 text-white hover:text-lux-accent">特展 Exhibition</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="py-2 text-white hover:text-lux-accent">關於 About</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="py-2 text-white hover:text-lux-accent">聯絡 Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen pt-36 pb-20 flex items-center justify-center overflow-hidden">
+        
+        <!-- Ambient Decorative Lighting Glows -->
+        <div class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-lux-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-lux-gold/5 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
+            
+            <!-- Left Editorial Text Content -->
+            <div class="lg:col-span-7 space-y-8">
+                
+                <div class="animate-text-1 inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-lux-border bg-white/[0.02] text-xs font-mono text-lux-sand">
+                    <span class="w-1.5 h-1.5 rounded-full bg-lux-accent animate-pulse"></span>
+                    <span class="tracking-widest uppercase">Visual Art & Digital Illustration 2026</span>
+                </div>
+
+                <h1 class="animate-text-2 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-white">
+                    光影的秩序，<br>
+                    <span class="italic font-light text-lux-sand">與靈魂的漫遊。</span>
+                </h1>
+
+                <p class="animate-text-3 text-lux-muted text-base sm:text-lg leading-relaxed max-w-xl font-light">
+                    我是 <strong class="text-white font-normal">吳予曦 (Yushi Wu)</strong>。專注於現代數位繪畫、敘事插畫與視覺創作。以極簡幾何、極致光影與情感對白，構建沉靜而富含想像空間的當代美學。
+                </p>
+
+                <!-- Action Links & Interactive Controls -->
+                <div class="animate-text-3 flex flex-wrap items-center gap-6 pt-4">
+                    <a href="#works" class="px-8 py-4 rounded-full bg-lux-sand text-black font-semibold text-xs uppercase tracking-[0.2em] hover:bg-white transition-all transform hover:-translate-y-0.5 gold-glow flex items-center gap-3">
+                        <span>探索畫廊 Showcase</span>
+                        <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                    </a>
+                    <a href="#exhibition" class="px-8 py-4 rounded-full border border-lux-border hover:border-lux-sand text-white font-medium text-xs uppercase tracking-[0.2em] transition-all">
+                        年度專題 Solo Exhibition
+                    </a>
+                </div>
+
+                <!-- Effect Indicators -->
+                <div class="animate-fade pt-10 border-t border-white/10 grid grid-cols-3 gap-6 text-[11px] font-mono text-lux-muted">
+                    <div>
+                        <span class="block text-white mb-1">TRANSFORM</span>
+                        <span>透視位移與旋轉</span>
+                    </div>
+                    <div>
+                        <span class="block text-white mb-1">SCALE</span>
+                        <span>優雅微動態縮放</span>
+                    </div>
+                    <div>
+                        <span class="block text-white mb-1">OPACITY</span>
+                        <span>沉浸式漸變光暈</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual Frame -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden glass-panel p-3 border border-lux-border animate-hero-img group">
+                    <div class="relative w-full h-full rounded-xl overflow-hidden">
+                        <img id="heroImage" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80" 
+                             alt="吳予曦 主視覺作品" 
+                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                             onerror="this.src='https://placehold.co/800x1000/121318/c5a880?text=YUSHI+WU+ART'">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                            <span class="text-[10px] font-mono tracking-widest text-lux-sand uppercase mb-1">Key Art Piece</span>
+                            <h3 class="font-serif text-2xl font-normal text-white">《星雲歌者 Chronicles of Nebula》</h3>
+                            <p class="text-xs text-lux-muted mt-1 font-light">Digital Concept Painting • 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#works" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-lux-muted hover:text-lux-sand transition-colors group">
+            <span class="text-[9px] tracking-[0.3em] uppercase font-mono">Scroll Down</span>
+            <div class="w-4 h-8 rounded-full border border-white/20 flex justify-center p-1">
+                <div class="w-0.5 h-2 bg-lux-sand rounded-full animate-bounce"></div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Gallery Works Section -->
+    <section id="works" class="py-32 relative bg-lux-card/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 reveal-on-scroll">
+                <div>
+                    <span class="text-xs font-mono tracking-[0.3em] uppercase text-lux-sand block mb-3">Curated Portfolio</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-normal text-white">典藏作品集 Gallery</h2>
+                </div>
+                <p class="text-lux-muted text-sm max-w-md font-light leading-relaxed">
+                    精選 9 件代表作品。點擊圖片可進入典藏觀賞與理念介紹，享受藝廊等級的閱讀感受。
+                </p>
+            </div>
+
+            <!-- Filter Category Buttons -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-16 reveal-on-scroll" id="filterContainer">
+                <button onclick="filterGallery('all')" class="filter-btn active px-6 py-2.5 rounded-full text-xs font-mono tracking-widest transition-all duration-300 bg-lux-sand text-black font-semibold shadow-lg" data-filter="all">
+                    ALL / 全部作品
+                </button>
+                <button onclick="filterGallery('illustration')" class="filter-btn px-6 py-2.5 rounded-full text-xs font-mono tracking-widest transition-all duration-300 glass-panel text-lux-muted hover:text-white" data-filter="illustration">
+                    ILLUSTRATION / 插畫
+                </button>
+                <button onclick="filterGallery('digital')" class="filter-btn px-6 py-2.5 rounded-full text-xs font-mono tracking-widest transition-all duration-300 glass-panel text-lux-muted hover:text-white" data-filter="digital">
+                    DIGITAL / 數位藝術
+                </button>
+                <button onclick="filterGallery('painting')" class="filter-btn px-6 py-2.5 rounded-full text-xs font-mono tracking-widest transition-all duration-300 glass-panel text-lux-muted hover:text-white" data-filter="painting">
+                    PAINTING / 繪畫創作
+                </button>
+            </div>
+
+            <!-- Artwork Grid (At least 6-9 works with scale, transform, opacity interactions) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10" id="galleryGrid">
+                
+                <!-- Card 1 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="digital" onclick="openLightbox(0)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="森林的耳語" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2025 • DIGITAL ART</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《森林的耳語 Whispers of the Forest》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">密林深處精靈與光影交織，以沉穩暖色重塑自然生命力。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">森林的耳語</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Digital Concept Art</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="illustration" onclick="openLightbox(1)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="孤獨的星雲誌" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2024 • ILLUSTRATION</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《孤獨的星雲誌 Chronicles of Solitude》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">深空旅人的平靜絮語，以幾何軌道表現宏大哲理。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">孤獨的星雲誌</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Editorial Illustration</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="painting" onclick="openLightbox(2)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80" alt="瞬息之花" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2026 • PAINTING</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《瞬息之花 Ephemeral Bloom》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">紀錄生命綻放瞬間的爆發力與短暫的美感。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">瞬息之花</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Acrylic & Canvas</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="digital" onclick="openLightbox(3)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="賽博夜想曲" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2025 • DIGITAL ART</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《賽博夜想曲 Cybernetic Serenade》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">霓虹幾何與溫柔音符的靜謐重奏。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">賽博夜想曲</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Cyber Aesthetics</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="painting" onclick="openLightbox(4)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="水彩裡的舊夢" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2024 • SKETCH</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《水彩裡的舊夢 Watercolor Reverie》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">記憶中模糊隨筆與柔美色塊的重逢。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">水彩裡的舊夢</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Watercolor & Pencil</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="illustration" onclick="openLightbox(5)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="午夜圖書館" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2025 • ILLUSTRATION</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《午夜圖書館 The Midnight Library》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">開啟未曾被書寫的平行世界與浮空建築。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">午夜圖書館</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Book Cover Concept</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="digital" onclick="openLightbox(6)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="漫遊者與晨星" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2026 • DIGITAL ART</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《漫遊者與晨星 Starlight Wanderer》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">動態流體線條與邊境漫遊哲思。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">漫遊者與晨星</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Fluid Art Exploration</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="painting" onclick="openLightbox(7)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80" alt="無聲奏鳴曲" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2024 • PAINTING</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《無聲奏鳴曲 Silent Sonata》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">粗獷紋理與寂靜旋律的肌理表達。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">無聲奏鳴曲</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Texture Fine Art</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="gallery-item art-card glass-panel rounded-2xl overflow-hidden cursor-pointer group border border-lux-border" data-category="illustration" onclick="openLightbox(8)">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black">
+                        <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=800&q=80" alt="浮空聖域" class="art-card-img w-full h-full object-cover opacity-90">
+                        <div class="art-card-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <span class="text-[10px] text-lux-sand font-mono tracking-widest uppercase mb-1">2026 • ILLUSTRATION</span>
+                            <h3 class="font-serif text-2xl font-normal text-white mb-2">《浮空聖域 Floating Sanctuary》</h3>
+                            <p class="text-xs text-lux-muted font-light line-clamp-2">極致細節與宏大遺跡景貌的世界觀塑造。</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex items-center justify-between bg-lux-card/80">
+                        <div>
+                            <h4 class="font-serif text-lg text-white font-normal">浮空聖域</h4>
+                            <span class="text-[11px] font-mono text-lux-muted">Worldbuilding Artwork</span>
+                        </div>
+                        <span class="w-9 h-9 rounded-full border border-lux-border flex items-center justify-center text-xs text-lux-sand group-hover:bg-lux-sand group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibition Feature Section -->
+    <section id="exhibition" class="py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="glass-panel rounded-3xl p-8 md:p-16 border border-lux-accent/30 relative overflow-hidden reveal-on-scroll">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-lux-accent/15 border border-lux-accent/30 text-lux-sand font-mono text-[11px] tracking-widest uppercase">
+                            <i class="fa-solid fa-compass"></i> Featured Exhibition Project
+                        </div>
+
+                        <h2 class="font-serif text-4xl sm:text-5xl font-normal text-white leading-tight">
+                            年度個人專題展覽<br>
+                            <span class="italic text-lux-sand">《流光織夢 2026 Solo Project》</span>
+                        </h2>
+
+                        <p class="text-lux-muted text-sm md:text-base font-light leading-relaxed">
+                            這項展覽專題將光影位移（Translate）與透視變形（Transform）融合於數位繪畫。探討當代人在科技網絡與個人內心棲居地之間的和解，展現純粹的當代美學。
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-6 pt-6 border-t border-white/10 font-mono text-xs">
+                            <div>
+                                <span class="text-lux-muted block mb-1 text-[10px]">EXHIBITION DATE</span>
+                                <strong class="text-white font-normal">2026.11.15</strong>
+                            </div>
+                            <div>
+                                <span class="text-lux-muted block mb-1 text-[10px]">MEDIUM</span>
+                                <strong class="text-white font-normal">Digital & Fine Art</strong>
+                            </div>
+                            <div>
+                                <span class="text-lux-muted block mb-1 text-[10px]">LOCATION</span>
+                                <strong class="text-white font-normal">Taipei / Online</strong>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap gap-4">
+                            <button onclick="openDetailModal()" class="px-8 py-3.5 rounded-full bg-lux-sand text-black font-semibold text-xs tracking-widest uppercase hover:bg-white transition-all">
+                                專題研析 Detail Report
+                            </button>
+                            <button onclick="openFullscreenMode(0)" class="px-8 py-3.5 rounded-full border border-lux-border text-white text-xs font-mono tracking-widest uppercase hover:border-lux-sand transition-all">
+                                <i class="fa-solid fa-expand mr-2"></i> 全螢幕視角 Fullscreen
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden border border-lux-border p-2 cursor-pointer group" onclick="openDetailModal()">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80" alt="展覽主視覺" class="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative bg-lux-card/60 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- Artist Image -->
+                <div class="lg:col-span-5 reveal-on-scroll">
+                    <div class="relative max-w-md mx-auto aspect-[3/4] rounded-2xl overflow-hidden glass-panel p-3 border border-lux-border">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="吳予曦 Yushi Wu" class="w-full h-full object-cover rounded-xl grayscale contrast-125">
+                    </div>
+                </div>
+
+                <!-- Artist Biography -->
+                <div class="lg:col-span-7 space-y-8 reveal-on-scroll">
+                    <div>
+                        <span class="text-xs font-mono tracking-[0.3em] uppercase text-lux-sand block mb-2">Artist Profile</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl font-normal text-white">吳予曦 Yushi Wu</h2>
+                        <p class="text-xs font-mono text-lux-muted mt-2 tracking-widest uppercase">Visual Artist / Digital Illustrator / Storyteller</p>
+                    </div>
+
+                    <p class="text-lux-muted text-base font-light leading-relaxed">
+                        畢業於藝術與設計學系，專精於概念繪畫、書籍視覺與數位敘事創作。作品致力於在現代簡約框架中探索光影、空間與人文氣息的平衡點，曾參與多次國內外數位藝術展出。
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-6 py-4 border-y border-white/10 font-mono">
+                        <div>
+                            <span class="font-serif text-3xl text-lux-sand block font-normal">06+</span>
+                            <span class="text-[11px] text-lux-muted uppercase tracking-wider">Years Experience</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl text-lux-sand block font-normal">50+</span>
+                            <span class="text-[11px] text-lux-muted uppercase tracking-wider">Client Projects</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl text-lux-sand block font-normal">12</span>
+                            <span class="text-[11px] text-lux-muted uppercase tracking-wider">Exhibitions</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-mono uppercase tracking-widest text-white mb-4">Creative Tools & Expertise</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono">
+                            <span class="px-4 py-2 rounded-full border border-lux-border text-lux-muted">Procreate</span>
+                            <span class="px-4 py-2 rounded-full border border-lux-border text-lux-muted">Adobe Photoshop</span>
+                            <span class="px-4 py-2 rounded-full border border-lux-border text-lux-muted">Clip Studio Paint</span>
+                            <span class="px-4 py-2 rounded-full border border-lux-border text-lux-muted">Blender 3D</span>
+                            <span class="px-4 py-2 rounded-full border border-lux-border text-lux-muted">AI Art Workflows</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
+            <span class="text-xs font-mono tracking-[0.3em] uppercase text-lux-sand block mb-3">Get In Touch</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-normal text-white mb-6">開啟藝術委託與合作</h2>
+            <p class="text-lux-muted text-sm font-light max-w-lg mx-auto mb-12">
+                歡迎聯繫商業插畫、專題展覽邀約或藝術品訂製。
+            </p>
+
+            <div class="glass-panel rounded-3xl p-8 md:p-12 border border-lux-border text-left">
+                <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-mono uppercase tracking-widest text-lux-muted mb-2">Your Name / 姓名</label>
+                            <input type="text" required placeholder="例如：張先生" class="w-full px-5 py-3.5 rounded-xl bg-lux-bg border border-lux-border text-white text-sm focus:outline-none focus:border-lux-sand transition-colors font-light">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono uppercase tracking-widest text-lux-muted mb-2">Email Address / 電子郵件</label>
+                            <input type="email" required placeholder="name@example.com" class="w-full px-5 py-3.5 rounded-xl bg-lux-bg border border-lux-border text-white text-sm focus:outline-none focus:border-lux-sand transition-colors font-light">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-widest text-lux-muted mb-2">Inquiry Type / 項目</label>
+                        <select class="w-full px-5 py-3.5 rounded-xl bg-lux-bg border border-lux-border text-white text-sm focus:outline-none focus:border-lux-sand transition-colors font-light">
+                            <option>商業插畫委託 Commercial Commission</option>
+                            <option>書籍/唱片封面裝幀 Cover Art & Branding</option>
+                            <option>專題展覽邀請 Exhibition Invitation</option>
+                            <option>其他合作洽詢 Other Inquiries</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-widest text-lux-muted mb-2">Message / 需求說明</label>
+                        <textarea rows="4" required placeholder="請簡述您的專案構想與預估時程..." class="w-full px-5 py-3.5 rounded-xl bg-lux-bg border border-lux-border text-white text-sm focus:outline-none focus:border-lux-sand transition-colors font-light"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-lux-sand text-black font-semibold text-xs font-mono tracking-widest uppercase hover:bg-white transition-all shadow-lg">
+                        Send Inquiry / 傳送委託訊息
+                    </button>
+                </form>
+
+                <div id="contactSuccess" class="hidden mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-center font-mono">
+                    <i class="fa-solid fa-check mr-2"></i> 訊息已順利送出！吳予曦將於 1-2 個工作天內回覆您。
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-8 mt-16 text-lg text-lux-muted">
+                <a href="#" class="hover:text-lux-sand transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-lux-sand transition-colors"><i class="fa-brands fa-behance"></i></a>
+                <a href="#" class="hover:text-lux-sand transition-colors"><i class="fa-brands fa-artstation"></i></a>
+                <a href="#" class="hover:text-lux-sand transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimalist Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-xs font-mono text-lux-muted">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳予曦 YUSHI WU. All Rights Reserved.</p>
+            <p class="flex items-center gap-3">
+                <span>Minimalist Modern Aesthetic</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-2xl" onclick="closeLightbox()"></div>
+
+        <div id="lightboxContainer" class="relative z-10 max-w-5xl w-full glass-panel rounded-3xl overflow-hidden border border-lux-border shadow-2xl transition-transform duration-300 transform scale-95 flex flex-col lg:flex-row max-h-[90vh]">
+            <button onclick="closeLightbox()" class="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-lux-sand hover:text-black transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="lg:w-2/3 bg-black flex items-center justify-center p-6 relative">
+                <img id="lightboxImg" src="" class="max-h-[70vh] w-auto object-contain rounded-lg">
+                <button onclick="prevLightboxImage()" class="absolute left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-lux-sand hover:text-black transition-colors">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextLightboxImage()" class="absolute right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-lux-sand hover:text-black transition-colors">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="lg:w-1/3 p-8 flex flex-col justify-between bg-lux-card/90 overflow-y-auto border-l border-white/5">
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between font-mono text-xs">
+                        <span id="lightboxCategory" class="px-3 py-1 rounded-full border border-lux-accent/40 text-lux-sand uppercase">CATEGORY</span>
+                        <span id="lightboxYear" class="text-lux-muted">2026</span>
+                    </div>
+
+                    <h3 id="lightboxTitle" class="font-serif text-3xl font-normal text-white">作品標題</h3>
+                    <p id="lightboxDesc" class="text-xs text-lux-muted font-light leading-relaxed">作品敘述內容...</p>
+
+                    <div class="border-t border-white/10 pt-4">
+                        <h4 class="text-xs font-mono uppercase tracking-widest text-lux-sand mb-2">Concept Design</h4>
+                        <p id="lightboxConcept" class="text-xs text-lux-muted font-light leading-relaxed">創作理念說明...</p>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono text-lux-muted">
+                    <span>Yushi Wu Collection</span>
+                    <button onclick="openFullscreenCurrent()" class="text-lux-sand hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-expand"></i> Fullscreen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Mode Container -->
+    <div id="fullscreenContainer" class="fixed inset-0 z-50 bg-black hidden flex flex-col items-center justify-center">
+        <div class="absolute top-6 left-6 right-6 flex items-center justify-between z-20 font-mono text-xs text-lux-muted">
+            <div>
+                <span>Use Arrow Keys <kbd class="px-2 py-0.5 border border-white/20 rounded">←</kbd> <kbd class="px-2 py-0.5 border border-white/20 rounded">→</kbd> | Press <kbd class="px-2 py-0.5 border border-white/20 rounded">ESC</kbd> to exit</span>
+            </div>
+            <button onclick="closeFullscreenMode()" class="px-4 py-2 rounded-full border border-white/20 hover:bg-lux-sand hover:text-black transition-colors">
+                Close Fullscreen
+            </button>
+        </div>
+
+        <div class="w-full h-full p-8 flex items-center justify-center">
+            <img id="fullscreenImg" src="" class="max-h-full max-w-full object-contain">
+        </div>
+
+        <div class="absolute bottom-6 px-6 py-2.5 rounded-full glass-panel text-white text-xs font-mono border border-lux-border">
+            <span id="fullscreenTitle">Title</span> • <span id="fullscreenMeta" class="text-lux-sand">2026</span>
+        </div>
+    </div>
+
+    <!-- Detail Report Modal -->
+    <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-2xl" onclick="closeDetailModal()"></div>
+        <div class="relative z-10 max-w-3xl w-full glass-panel rounded-3xl overflow-hidden border border-lux-border p-8 md:p-10 max-h-[90vh] overflow-y-auto space-y-6">
+            <button onclick="closeDetailModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-lux-sand hover:text-black transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="space-y-4">
+                <span class="text-xs font-mono tracking-widest text-lux-sand uppercase">Special Exhibition Analysis</span>
+                <h2 class="font-serif text-3xl font-normal text-white">《流光織夢 Solo Exhibition 2026》</h2>
+                <p class="text-xs text-lux-muted font-light leading-relaxed">
+                    以現代簡約風格與極致光影重塑觀展體驗。專題強調「空間留白」與「畫面動態位移」的結合，展示數位畫筆在不同空間層次上的呼吸變化。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 border-y border-white/10 py-4 font-mono text-xs">
+                <div>
+                    <span class="text-lux-muted block text-[10px]">PROJECT</span>
+                    <span class="text-white">流光織夢</span>
+                </div>
+                <div>
+                    <span class="text-lux-muted block text-[10px]">YEAR</span>
+                    <span class="text-white">2026</span>
+                </div>
+                <div>
+                    <span class="text-lux-muted block text-[10px]">STYLE</span>
+                    <span class="text-white">Minimal High-End</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" class="rounded-xl aspect-square object-cover">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80" class="rounded-xl aspect-square object-cover">
+                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=500&q=80" class="rounded-xl aspect-square object-cover">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Artwork Data Array
+        const artworkData = [
+            {
+                title: "《森林的耳語 Whispers of the Forest》",
+                year: "2025",
+                category: "DIGITAL ART",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+                desc: "探索密林深處精靈與光影交織的奇幻詩篇，運用溫暖光暈營造治癒氛圍。",
+                concept: "利用微光粒子與樹葉縫隙投射的光束，比喻人在孤獨時刻依然能找到溫柔引導。"
+            },
+            {
+                title: "《孤獨的星雲誌 Chronicles of Solitude》",
+                year: "2024",
+                category: "ILLUSTRATION",
+                img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80",
+                desc: "航行在無垠深空的旅人故事，以沉靜的藍紫色調勾勒出對星辰的渴望。",
+                concept: "結合星體軌道幾何與寫實風格人物，展現廣袤宇宙與渺小個體之間的平靜對話。"
+            },
+            {
+                title: "《瞬息之花 Ephemeral Bloom》",
+                year: "2026",
+                category: "PAINTING",
+                img: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80",
+                desc: "捕捉花朵綻放瞬間的爆發力與脆弱感，使用厚重重疊的色彩層次。",
+                concept: "透過高對比度色彩與油畫質感刷痕，記錄生命熱烈而短暫的時刻。"
+            },
+            {
+                title: "《賽博夜想曲 Cybernetic Serenade》",
+                year: "2025",
+                category: "DIGITAL ART",
+                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+                desc: "未來霓虹都市與溫柔音符的碰撞，展現數位繪畫對龐克美學的詮釋。",
+                concept: "將冷調機械與溫暖音樂符號融為一體，反思科技發展下的情感維度。"
+            },
+            {
+                title: "《水彩裡的舊夢 Watercolor Reverie》",
+                year: "2024",
+                category: "SKETCH",
+                img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+                desc: "混合水彩與鉛筆速寫的紀錄，呈現童年記憶中模糊而溫馨的日常。",
+                concept: "利用顏料暈染邊界的模糊感，營造回憶隨時間沉澱的夢幻質感。"
+            },
+            {
+                title: "《午夜圖書館 The Midnight Library》",
+                year: "2025",
+                category: "ILLUSTRATION",
+                img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80",
+                desc: "零點開啟的神秘書廊，藏著未被寫下的平行世界。",
+                concept: "運用透視縱深與浮空書頁，打造充滿想像空間的魔幻現實主義視野。"
+            },
+            {
+                title: "《漫遊者與晨星 Starlight Wanderer》",
+                year: "2026",
+                category: "DIGITAL ART",
+                img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+                desc: "動態粒子與抽象流體的結合創作，表達對宇宙邊境的哲學遐想。",
+                concept: "強調顏色與線條的動態扭曲（Transform），象徵思想在時空中的漫遊。"
+            },
+            {
+                title: "《無聲奏鳴曲 Silent Sonata》",
+                year: "2024",
+                category: "PAINTING",
+                img: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80",
+                desc: "壓克力顏料創作，透過粗獷紋理與柔和基調表現寂靜中的旋律。",
+                concept: "以視覺畫筆取替聽覺音符，試圖在無聲的畫布上譜寫動人旋律。"
+            },
+            {
+                title: "《浮空聖域 Floating Sanctuary》",
+                year: "2026",
+                category: "ILLUSTRATION",
+                img: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=1200&q=80",
+                desc: "雲端之上遺落的古代遺跡，展現宏大世界觀與精緻細節雕琢。",
+                concept: "極致細節與宏大雲海景貌，帶來超越日常現實的壯麗體驗。"
+            }
+        ];
+
+        let currentArtworkIndex = 0;
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Category Filter Function
+        function filterGallery(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.classList.add('bg-lux-sand', 'text-black', 'font-semibold', 'shadow-lg');
+                    btn.classList.remove('glass-panel', 'text-lux-muted');
+                } else {
+                    btn.classList.remove('bg-lux-sand', 'text-black', 'font-semibold', 'shadow-lg');
+                    btn.classList.add('glass-panel', 'text-lux-muted');
+                }
+            });
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                if (category === 'all' || itemCategory === category) {
+                    item.classList.remove('hide');
+                } else {
+                    item.classList.add('hide');
+                }
+            });
+        }
+
+        // Lightbox Logic
+        function openLightbox(index) {
+            currentArtworkIndex = index;
+            const data = artworkData[index];
+
+            document.getElementById('lightboxImg').src = data.img;
+            document.getElementById('lightboxTitle').innerText = data.title;
+            document.getElementById('lightboxYear').innerText = data.year;
+            document.getElementById('lightboxCategory').innerText = data.category;
+            document.getElementById('lightboxDesc').innerText = data.desc;
+            document.getElementById('lightboxConcept').innerText = data.concept;
+
+            const modal = document.getElementById('lightboxModal');
+            const container = document.getElementById('lightboxContainer');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            const container = document.getElementById('lightboxContainer');
+
+            modal.classList.add('opacity-0');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function prevLightboxImage() {
+            currentArtworkIndex = (currentArtworkIndex - 1 + artworkData.length) % artworkData.length;
+            openLightbox(currentArtworkIndex);
+        }
+
+        function nextLightboxImage() {
+            currentArtworkIndex = (currentArtworkIndex + 1) % artworkData.length;
+            openLightbox(currentArtworkIndex);
+        }
+
+        // Fullscreen Experience
+        function openFullscreenMode(index) {
+            currentArtworkIndex = index;
+            updateFullscreenContent();
+            document.getElementById('fullscreenContainer').classList.remove('hidden');
+        }
+
+        function openFullscreenCurrent() {
+            closeLightbox();
+            openFullscreenMode(currentArtworkIndex);
+        }
+
+        function updateFullscreenContent() {
+            const data = artworkData[currentArtworkIndex];
+            document.getElementById('fullscreenImg').src = data.img;
+            document.getElementById('fullscreenTitle').innerText = data.title;
+            document.getElementById('fullscreenMeta').innerText = `${data.year} • ${data.category}`;
+        }
+
+        function closeFullscreenMode() {
+            document.getElementById('fullscreenContainer').classList.add('hidden');
+        }
+
+        // Detail Modal
+        function openDetailModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeDetailModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Form Submit Simulation
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').reset();
+            const success = document.getElementById('contactSuccess');
+            success.classList.remove('hidden');
+            setTimeout(() => success.classList.add('hidden'), 5000);
+        }
+
+        // Keyboard Navigation Controls
+        document.addEventListener('keydown', (e) => {
+            const fullscreen = document.getElementById('fullscreenContainer');
+            const lightbox = document.getElementById('lightboxModal');
+
+            if (e.key === 'Escape') {
+                if (!fullscreen.classList.contains('hidden')) closeFullscreenMode();
+                if (!lightbox.classList.contains('hidden')) closeLightbox();
+                closeDetailModal();
+            }
+
+            if (!fullscreen.classList.contains('hidden') || !lightbox.classList.contains('hidden')) {
+                if (e.key === 'ArrowLeft') {
+                    currentArtworkIndex = (currentArtworkIndex - 1 + artworkData.length) % artworkData.length;
+                    if (!fullscreen.classList.contains('hidden')) updateFullscreenContent();
+                    if (!lightbox.classList.contains('hidden')) openLightbox(currentArtworkIndex);
+                } else if (e.key === 'ArrowRight') {
+                    currentArtworkIndex = (currentArtworkIndex + 1) % artworkData.length;
+                    if (!fullscreen.classList.contains('hidden')) updateFullscreenContent();
+                    if (!lightbox.classList.contains('hidden')) openLightbox(currentArtworkIndex);
+                }
+            }
+        });
+
+        // Intersection Observer for Smooth Reveal Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
